@@ -1,0 +1,112 @@
+[include]
+  path = ~/.gitconfig.local                           # Machine-specific config (user.name/email, work overrides) kept out of the repo
+
+[core]
+  fsmonitor = true                                    # Use filesystem monitor daemon to speed up `git status` in large repos
+  untrackedcache = true                               # Cache untracked-file lookups for faster `git status`
+  pager = delta                                       # Use delta as the pager for diffs/log/blame (syntax highlighting, nicer layout)
+
+[init]
+  defaultbranch = main                                # Name the first branch `main` instead of `master`
+
+[help]
+  autocorrect = prompt                                # Suggest mistyped commands and ask before running the guess
+
+[column]
+  ui = auto                                           # Show list output (branches, tags, ...) in columns when on a terminal
+
+# --- Remote interaction: fetch / pull / push -------------------------------
+
+[fetch]
+  prune = true                                        # Delete local remote-tracking branches that no longer exist on the remote
+  prunetags = true                                    # Same, for tags deleted on the remote
+  all = true                                          # `git fetch` fetches all remotes, not just origin
+  output = compact                                    # Condense fetch output to one line per ref
+  parallel = 0                                        # Fetch remotes/submodules in parallel, using a sensible auto number of jobs
+
+[pull]
+  rebase = true                                       # `git pull` rebases instead of creating merge commits
+
+[push]
+  autosetupremote = true                              # First push of a new branch auto-creates the upstream (no -u needed)
+  default = simple                                    # Push the current branch to its same-named upstream only
+  followtags = true                                   # Push annotated tags that point at pushed commits
+  useForceIfIncludes = true                           # --force-with-lease also requires having fetched what gets overwritten
+
+[checkout]
+  defaultRemote = origin                              # When a branch name exists on several remotes, prefer origin
+
+# --- Branching, merging, rebasing ------------------------------------------
+
+[branch]
+  sort = -committerdate                               # `git branch` lists most recently committed branches first
+  autosetupmerge = true                               # Set up upstream tracking when branching from a remote branch
+
+[merge]
+  conflictStyle = zdiff3                              # Conflict markers include the common ancestor, with trivial lines trimmed
+  autoStash = true                                    # Auto-stash dirty changes before merging, pop them after
+
+[rebase]
+  stat = true                                         # Show a diffstat of what changed after the rebase
+  autostash = true                                    # Auto-stash dirty changes before rebasing, pop them after
+  missingCommitsCheck = error                         # Abort interactive rebase if commits were silently dropped from the todo list
+  updateRefs = true                                   # Rebase also moves branch refs pointing at rebased commits (stacked branches)
+
+[rerere]
+  enabled = true                                      # Record conflict resolutions and replay them on identical future conflicts
+  autoUpdate = true                                   # Auto-stage files rerere resolved
+
+# --- Display: diff / status / log ------------------------------------------
+
+[diff]
+  tool = delta                                        # `git difftool` renders with delta (see [difftool "delta"] below)
+  algorithm = histogram                               # Histogram algorithm gives more readable diffs than the default (myers)
+  colormoved = zebra                                  # Color moved lines differently from added/removed ones
+  wsErrorHighlight = all                              # Highlight whitespace errors on old, new, and context lines
+  mnemonicprefix = true                               # Use i/w/c/o prefixes (index/worktree/commit/object) instead of a/b
+  renames = true                                      # Detect renamed files in diffs
+  wordDiff = color                                    # Show word-level changes inline, colored
+
+[delta]
+  navigate = true                                     # n/N jump between files in the diff
+  dark = true                                         # Use delta's dark theme
+  line-numbers = true                                 # Show line numbers alongside the diff
+  side-by-side = true                                 # Two-column split view: old on the left, new on the right
+
+[difftool]
+  prompt = false                                      # Don't ask for confirmation before viewing each file
+
+[difftool "delta"]
+  cmd = delta \"$LOCAL\" \"$REMOTE\"                  # Compare the two file versions with delta
+
+[interactive]
+  diffFilter = delta --color-only                     # Pipe interactive-mode diffs (git add -p) through delta, colors only
+
+[status]
+  relativePaths = false                               # Show full paths from the repo root, not relative to the current directory
+  short = true                                        # Use short format (like `git status -s`) by default
+  branch = true                                       # Show branch/tracking info even in short format
+  submoduleSummary = true                             # Show a summary of submodule changes
+
+[commit]
+  verbose = true                                      # Show the full staged diff in the commit-message editor
+
+[log]
+  follow = true                                       # `git log <file>` follows the file across renames
+  abbrevCommit = true                                 # Show abbreviated commit hashes
+  decorate = short                                    # Show branch/tag names next to commits (short form)
+  mailmap = true                                      # Rewrite author names/emails using .mailmap
+  showSignature = false                               # Don't verify/show GPG signatures in log output
+
+[format]
+  pretty = fuller                                     # Default log format: shows both author and committer with dates
+
+[tag]
+  sort = version:refname                              # Sort tags as version numbers (v1.10 after v1.9, not before)
+
+# --- Misc -------------------------------------------------------------------
+
+[alias]
+  amend = commit -a --amend --no-edit                 # Amend all tracked changes into the last commit, keeping its message
+  show-alias = config --get-regexp ^alias\\.          # List all configured aliases
+  lol = log --oneline --branches --decorate --graph   # Compact graph of all branches
