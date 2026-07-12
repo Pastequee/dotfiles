@@ -33,3 +33,8 @@ fi
 
 # Local bin directory
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
+
+export EDITOR="zed"

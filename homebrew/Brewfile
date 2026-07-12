@@ -1,0 +1,20 @@
+# Take over apps that were installed manually instead of failing on them
+cask_args adopt: true
+
+# Casks
+cask "1password"
+cask "codexbar"
+cask "keepingyouawake"
+cask "orbstack"
+cask "zed"
+cask "ghostty"
+cask "t3-code@nightly"
+
+# Tools & CLIs
+brew "zsh"
+brew "fnm"
+brew "gh"
+brew "helix"
+brew "ripgrep"
+brew "libpq"
+brew "git-delta"

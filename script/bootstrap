@@ -2,6 +2,11 @@
 #
 # bootstrap installs things.
 
+if [ "$(uname -s)" != "Darwin" ]; then
+  echo "These dotfiles only support macOS."
+  exit 1
+fi
+
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
@@ -36,11 +41,7 @@ setup_gitconfig () {
   then
     info 'setup gitconfig'
 
-    git_credential='cache'
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      git_credential='osxkeychain'
-    fi
+    git_credential='osxkeychain'
 
     # Try to get existing git config values
     git_authorname=$(git config --get user.name 2>/dev/null || echo "")
@@ -172,19 +173,14 @@ install_dotfiles () {
 setup_gitconfig
 install_dotfiles
 
-# Install dependencies. On a Mac, bin/dot also sets macOS defaults and
-# updates Homebrew; on other systems just run the topic installers.
+# Install dependencies: bin/dot sets macOS defaults, updates Homebrew,
+# and runs every topic's install.sh.
 info "installing dependencies"
-if [ "$(uname -s)" == "Darwin" ]
+if "$DOTFILES_ROOT/bin/dot"
 then
-  if "$DOTFILES_ROOT/bin/dot"
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
+  success "dependencies installed"
 else
-  "$DOTFILES_ROOT/script/install"
+  fail "error installing dependencies"
 fi
 
 echo ''

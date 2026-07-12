@@ -2,6 +2,7 @@
   path = ~/.gitconfig.local                           # Machine-specific config (user.name/email, work overrides) kept out of the repo
 
 [core]
+  excludesfile = ~/.gitignore_global                  # Ignore OS/editor junk in every repo without touching their .gitignore
   fsmonitor = true                                    # Use filesystem monitor daemon to speed up `git status` in large repos
   untrackedcache = true                               # Cache untracked-file lookups for faster `git status`
   pager = delta                                       # Use delta as the pager for diffs/log/blame (syntax highlighting, nicer layout)

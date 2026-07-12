@@ -16,8 +16,9 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # Show the ~/Library folder.
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
+# Set a really fast key repeat, with a short delay before it kicks in.
 defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Set the Finder prefs for showing a few different volumes on the Desktop.
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -35,3 +36,6 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # Global WebKit developer extras (this one still works)
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Restart Finder and Dock so the changes above apply immediately.
+killall Finder Dock 2>/dev/null || true
