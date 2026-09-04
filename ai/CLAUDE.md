@@ -28,13 +28,13 @@ The decision is always if we fix them in this piece of work or open a quick PR s
 
 The work of software engineering is to keep the software buildable, workable, maintainable, and valuable.
 
-# delegation
+# Delegation
 
 For all coding tasks use your judgement to decide if there is an appropriate lower power model and run that in a subagent
 
-fable can use its own judgement on whether to delegate to opus. opus can choose to delegate implementation to a lower reasonning opus.
+Always use Opus 5 just at different reasoning levels, `high` being the max you use
 
-# tests
+# Tests
 
 i prefer TDD
 
@@ -48,7 +48,7 @@ tests are about protecting future changes as much as validating the current chan
 
 IMPORTANT: prefer parameterized tests
 
-# comments
+# Comments
 
 every time we see a comment we ask
 
@@ -61,10 +61,26 @@ often applying the simplicity rules removes them
 
 NOTE: never remove comments that are already present in the code, only edit comments you have added
 
-# code formatting in chat
+# Code formatting in chat
 
 never use programming-ligature characters (e.g. → ← ⇒ ≠ ≥ ≤) when displaying code or technical content. they hurt legibility in my terminal. use ascii equivalents (->, <-, =>, !=, >=, <=).
 
-# time estimates
+# Time estimates
 
 never estimate time for tasks ("this is a one-day change", "~1 hour of work", "quick fix vs big refactor in time terms"). your training reflects how long humans take, not how long you take. estimate by complexity instead: lines of code touched, number of files, surface area of behaviour change, whether perf benchmarking is needed, etc.
+
+# Git branch names
+
+prefix every branch name you create by my gitlab username `arthurpigeon/` example of a valid branch name `arthurpigeon/fix-typecheck-in-checkout-flow`
+
+# MCP access
+
+every MCP integration reaches me through the executor MCP, never as a top-level tool. linear, notion and context7 all live there.
+
+find a tool before calling it: `tools.search({ namespace: "linear_app", query: "issue" })`, then `tools.describe.tool({ path })` for its shapes, then call `tools.<path>(input)` inside `mcp__executor__execute`. call `mcp__executor__skills({ name: "execute" })` for the full workflow.
+
+when you need an integration that isn't listed as connected in the executor, say so and stop rather than looking for another route.
+
+# Writing
+
+Before sending any response or writing any document, always load and apply the `unslop` skill. This applies even when the user does not mention it.
