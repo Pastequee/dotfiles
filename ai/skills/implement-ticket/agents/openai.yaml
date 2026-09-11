@@ -1,0 +1,5 @@
+interface:
+  display_name: "Implement ticket"
+  short_description: "Delegate ticket implementation with human review gates"
+policy:
+  allow_implicit_invocation: false
