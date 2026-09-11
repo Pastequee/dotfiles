@@ -20,8 +20,9 @@ make the proposed approach and its consequences reviewable.
 
 These are suggestions. Include other material when it helps the decision and omit
 what adds no value. Diagrams, interactive mockups, timelines, annotated examples,
-and comparison tables are possible assets. Use a dependency graph when branches
-and joins matter; choose another representation when it communicates better.
+and comparison tables are possible assets. When the plan uses a DAG, include its
+visualization according to [dag.md](dag.md). Choose its layout and rendering freely;
+the graph defines dependencies, not the report's visual structure.
 
 ## Apply the design standard
 

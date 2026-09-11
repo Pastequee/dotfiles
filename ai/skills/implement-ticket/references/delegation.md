@@ -42,8 +42,9 @@ edits, assign exclusive file ownership or isolated worktrees. Serialize edits th
 share files, contracts, or repository state. In isolated worktrees, workers may
 commit their slices; the orchestrator integrates and verifies the combined result.
 
-Before increasing parallelism, account for integration and review cost. A graph
-edge describes an actual dependency, not just a preferred ordering.
+Before increasing parallelism, account for integration and review cost. Use
+[dag.md](dag.md) for dependency semantics and readiness. File ownership and runtime
+limits may serialize ready nodes without adding artificial dependency edges.
 
 When an agent stalls or fails, identify whether the brief, missing evidence,
 environment, or capability caused the problem. Improve the assignment or escalate

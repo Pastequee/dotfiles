@@ -64,9 +64,14 @@ independence, depth, and variety of spec, plan, and code reviews as uncertainty 
 consequences grow. Review preparation before presenting it to the user. Resolve
 findings or expose the remaining decision explicitly.
 
-Represent dependencies when they affect execution. Use a graph only when branches
-and joins clarify the work. Make material decisions and verification obligations
-concrete while leaving routine implementation choices to the worker.
+For work with multiple dependent assignments, make the plan a directed acyclic
+graph (DAG). Nodes are bounded work or human decisions; an edge means the successor
+requires the predecessor's accepted result. Read [dag.md](references/dag.md) to
+define, validate, visualize, and execute the graph. Small linear work can use a
+sequence in chat with the same dependency and approval rules.
+
+Make material decisions and verification obligations concrete while leaving
+routine implementation choices to the worker.
 
 Preparation is complete when the user can judge the proposed behavior and approach,
 and an implementer can start without inventing a material requirement.
@@ -85,9 +90,10 @@ dependency scheduling changes remain yours to make.
 
 ## 4. Implement, verify, and commit
 
-Assign coherent slices after approval. Run independent assignments concurrently
-when dependencies and edit ownership permit. Integrate completed slices in
-dependency order and verify their combined behavior at meaningful joins.
+After approval, dispatch ready DAG nodes using the execution rules in
+[dag.md](references/dag.md). Readiness requires accepted dependencies and cleared
+human gates. Coordinate concurrent edits using the delegation guidance. Verify
+combined behavior at integration joins before releasing their successors.
 
 Use the repository's checks and testing conventions. Match tests to acceptance
 criteria and credible failure modes. For bug fixes, reproduce the defect and
@@ -103,7 +109,7 @@ ticket's changes and keep unrelated edits out. Publishing commits requires sessi
 authorization; making commits alone does not authorize a push.
 
 Maintain a compact local execution record for work that spans assignments or
-gates. Track the ticket source, current report revision, approvals, assignments,
+gates. Track the ticket source, current report revision, DAG state, approvals, assignments,
 commits, verification evidence, unresolved findings, and next step. Use an existing
 artifact location when available. Keep reports and state outside tracked product
 files unless the repository or user calls for them there.
