@@ -7,7 +7,7 @@ macOS machine setup with [mise](https://mise.jdx.dev/). No chezmoi, nix, or Brew
 ```sh
 xcode-select --install
 curl https://mise.run | sh
-git clone <this-repo> ~/src/dotfiles
+git clone git@github.com:Pastequee/dotfiles.git ~/src/dotfiles
 cd ~/src/dotfiles
 ~/.local/bin/mise trust
 ~/.local/bin/mise bootstrap --dry-run
