@@ -27,21 +27,39 @@ eza = "latest"
 "brew-cask:orbstack" = "latest"
 "mas:1044549675" = "latest" # Elmedia Video Player
 
+[bootstrap.macos.dock]
+autohide = true
+autohide_delay = 0
+autohide_time_modifier = 0.4
+tilesize = 60
+show_recents = false
+
 [bootstrap.macos.keyboard]
 key_repeat = 1
 initial_key_repeat = 15
+press_and_hold = true
 
 [bootstrap.macos.finder]
 show_all_files = true
 
 [bootstrap.macos.defaults]
-"NSGlobalDomain" = { WebKitDeveloperExtras = true }
+"NSGlobalDomain" = { WebKitDeveloperExtras = true, KeyRepeat = 120.0 }
+"com.apple.Accessibility" = { KeyRepeatEnabled = 0 }
 "com.apple.NetworkBrowser" = { BrowseAllInterfaces = 1 }
+"com.apple.finder" = { NewWindowTarget = "PfHm", ShowRecentTags = false }
+
+# Spotlight: Option+Space (keycode 49, option 524288). Frees Command+Space for Tinycast.
+[[bootstrap.macos.defaults_entries]]
+domain = "com.apple.symbolichotkeys"
+key = "AppleSymbolicHotKeys"
+path = ["64"]
+value = { enabled = true, value = { type = "standard", parameters = [32, 49, 524288] } }
 
 [bootstrap.hooks.post-defaults]
 run = [
   "chflags nohidden ~/Library",
-  "killall Finder Dock 2>/dev/null || true",
+  "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u",
+  "killall Finder Dock SystemUIServer 2>/dev/null || true",
 ]
 
 [dotfiles]
@@ -56,7 +74,9 @@ run = [
 "~/.ssh/config.d/dotfiles" = { source = "home/ssh/config", mode = "symlink" }
 "~/.ssh/config/include-dotfiles" = { line = "Include ~/.ssh/config.d/dotfiles" }
 
-# Vendor CLIs use official install scripts; Tinycast needs Homebrew.
+# Vendor CLIs use official install scripts; Tinycast is a GitHub DMG (no brew CLI).
+# This file is also ~/.config/mise/config.toml, so task `file =` paths resolve from $HOME.
 [tasks.bootstrap]
-description = "Install Tinycast, T3, Cursor CLI, and Codex"
-file = "scripts/install-extras.sh"
+description = "Install Tinycast, Cursor CLI, and Codex"
+dir = "~/src/dotfiles"
+run = "./scripts/install-extras.sh"
