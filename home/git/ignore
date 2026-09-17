@@ -1,0 +1,28 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Volume metadata
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Editors
+.idea
+.helix
+
+# Build / language caches
+.cache
+compile_commands.json
+.mypy_cache
+tags
+*.xcworkspace
+*.xcodeproj

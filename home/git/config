@@ -1,0 +1,101 @@
+[alias]
+  st = status -s
+  lol = log --oneline --graph --all
+
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
+
+[init]
+  defaultBranch = main
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+  mnemonicPrefix = true
+  renames = true
+
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[fetch]
+  prune = true
+
+[help]
+  autocorrect = prompt
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[core]
+  editor = hx
+  excludesfile = ~/.config/git/ignore
+  pager = delta --side-by-side
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
+[merge]
+  conflictstyle = zdiff3
+
+[pull]
+  rebase = true
+  default = current
+
+[include]
+  path = ~/.config/git/local_config
+
+[status]
+  showUntrackedFiles = all
+
+[color "branch"]
+  current = green
+  local = yellow
+  remote = red
+
+[color "diff"]
+  frag = magenta
+  meta = yellow
+  new = green
+  old = red
+
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+
+[delta]
+  features = line-numbers decorations
+  line-numbers = true
+  minus-style = syntax "#3f0001"
+  plus-emph-style = syntax "#005600"
+  plus-style = syntax "#002300"
+  navigate = true
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+  line-numbers-left-style = cyan
+  line-numbers-minus-style = bold 124
+  line-numbers-plus-style = bold 28
+  line-numbers-right-style = cyan
+
+[interactive]
+  diffFilter = delta --color-only
+
+[ui]
+  color = auto

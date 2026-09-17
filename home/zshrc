@@ -1,0 +1,29 @@
+# mise (binary may live in ~/.local/bin before PATH is fully set)
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+elif [[ -x "$HOME/.local/bin/mise" ]]; then
+  eval "$("$HOME/.local/bin/mise" activate zsh)"
+fi
+
+export ZSH_DIR="$HOME/.config/zsh"
+
+source "$ZSH_DIR/export.zsh"
+source "$ZSH_DIR/alias.zsh"
+source "$ZSH_DIR/functions.zsh"
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
+
+autoload -Uz compinit && compinit -C
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+[[ -f "$ZSH_DIR/local.zsh" ]] && source "$ZSH_DIR/local.zsh"

@@ -1,0 +1,49 @@
+add_newline = false
+
+format = """
+$character\
+$username\
+$hostname\
+$localip\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$c\
+$cmake\
+$deno\
+$guix_shell\
+$nodejs\
+$php\
+$python\
+$rust\
+$swift\
+$nix_shell\
+$memory_usage\
+$env_var\
+$custom\
+$sudo\
+$status\
+$cmd_duration\
+$line_break\
+$character\
+$jobs\
+"""
+
+[character]
+  success_symbol = '[│](bold green)'
+  error_symbol = '[│](bold red)'
+
+[status]
+  disabled = false
+  format = '\[[$status]($style)\] '
+
+[sudo]
+  disabled = false
+
+[custom]
+  disabled = true

@@ -1,0 +1,13 @@
+Host *
+	LogLevel VERBOSE
+	Compression yes
+	ForwardX11 no
+	IdentityAgent ~/.1password/agent.sock
+
+Host hls1.tail2d404b.ts.net
+	HostName hls1
+	User arthur
+
+Host hls1
+	HostName hls1
+	User arthur

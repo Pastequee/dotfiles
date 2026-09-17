@@ -1,0 +1,10 @@
+# Ghostty — https://ghostty.org/docs/config
+# Reload: cmd+shift+,
+
+theme = catppuccin-mocha
+font-family = JetBrains Mono
+macos-option-as-alt = true
+window-padding-x = 8
+window-padding-y = 8
+cursor-style = bar
+shell-integration-features = no-cursor

@@ -1,0 +1,62 @@
+min_version = "2026.8.0"
+
+[tools]
+node = "lts"
+bun = "latest"
+fzf = "latest"
+helix = "latest"
+gh = "latest"
+ripgrep = "latest"
+jq = "latest"
+delta = "latest"
+starship = "latest"
+fd = "latest"
+eza = "latest"
+
+[bootstrap.packages]
+"brew:mas" = "latest"
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:helium-browser" = "latest"
+"brew-cask:codexbar" = "latest"
+"brew-cask:tailscale-app" = "latest"
+"brew-cask:yaak" = "latest"
+"brew-cask:beekeeper-studio" = "latest"
+"brew-cask:orbstack" = "latest"
+"mas:1044549675" = "latest" # Elmedia Video Player
+
+[bootstrap.macos.keyboard]
+key_repeat = 1
+initial_key_repeat = 15
+
+[bootstrap.macos.finder]
+show_all_files = true
+
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = { WebKitDeveloperExtras = true }
+"com.apple.NetworkBrowser" = { BrowseAllInterfaces = 1 }
+
+[bootstrap.hooks.post-defaults]
+run = [
+  "chflags nohidden ~/Library",
+  "killall Finder Dock 2>/dev/null || true",
+]
+
+[dotfiles]
+"~/.config/mise/config.toml" = { source = "mise.toml", mode = "symlink" }
+"~/.zshrc" = { source = "home/zshrc", mode = "symlink" }
+"~/.config/zsh" = { source = "home/zsh", mode = "symlink-each" }
+"~/.config/git/config" = { source = "home/git/config", mode = "symlink" }
+"~/.config/git/ignore" = { source = "home/git/ignore", mode = "symlink" }
+"~/.config/starship.toml" = { source = "home/starship.toml", mode = "symlink" }
+"~/.config/helix/config.toml" = { source = "home/helix/config.toml", mode = "symlink" }
+"~/.config/ghostty/config.ghostty" = { source = "home/ghostty/config.ghostty", mode = "symlink" }
+"~/.ssh/config.d/dotfiles" = { source = "home/ssh/config", mode = "symlink" }
+"~/.ssh/config/include-dotfiles" = { line = "Include ~/.ssh/config.d/dotfiles" }
+
+# Vendor CLIs use official install scripts; Tinycast needs Homebrew.
+[tasks.bootstrap]
+description = "Install Tinycast, T3, Cursor CLI, and Codex"
+file = "scripts/install-extras.sh"
