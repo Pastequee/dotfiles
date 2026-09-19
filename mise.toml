@@ -25,6 +25,8 @@ eza = "latest"
 "brew-cask:yaak" = "latest"
 "brew-cask:beekeeper-studio" = "latest"
 "brew-cask:orbstack" = "latest"
+"brew-cask:nordvpn" = "latest"
+"brew-cask:slack" = "latest"
 "mas:1044549675" = "latest" # Elmedia Video Player
 
 [bootstrap.macos.dock]
@@ -33,11 +35,6 @@ autohide_delay = 0
 autohide_time_modifier = 0.4
 tilesize = 60
 show_recents = false
-
-[bootstrap.macos.keyboard]
-key_repeat = 1
-initial_key_repeat = 15
-press_and_hold = true
 
 [bootstrap.macos.finder]
 show_all_files = true
