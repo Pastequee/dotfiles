@@ -35,7 +35,8 @@ mise bootstrap
 | Path | Role |
 | --- | --- |
 | `mise.toml` | tools, casks, dotfile links |
-| `home/zshrc` | entrypoint: mise, starship, fzf |
+| `home/zshrc` | entrypoint: mise, starship, fzf, history, zinit plugins |
+| `home/zsh/plugins.zsh` | completions, fzf-tab, Deja, history search, syntax highlighting |
 | `home/zsh/export.zsh` | env vars |
 | `home/zsh/alias.zsh` | aliases |
 | `home/zsh/functions.zsh` | shell functions |
@@ -44,7 +45,19 @@ mise bootstrap
 | `home/helix/config.toml` | editor |
 | `home/ghostty/config.ghostty` | terminal stub |
 | `home/ssh/config` | 1Password agent + hls1 hosts (included, not the main ssh_config) |
-| `scripts/install-extras.sh` | Tinycast DMG, Cursor CLI, Codex |
+| `scripts/install-extras.sh` | zinit, Deja, zsh plugins, Tinycast DMG, Cursor CLI, Codex |
+
+Bootstrap installs [zinit](https://github.com/zdharma-continuum/zinit) under `${XDG_DATA_HOME:-~/.local/share}/zinit/zinit.git` and [Deja](https://github.com/Giammarco-Ferranti/deja) via its official binary installer (without changing `.zshrc`), importing existing history on first install. zinit manages zsh-completions, fzf-tab, zsh-history-substring-search, Deja's integration, and zsh-syntax-highlighting. Plugin checkouts and Deja's local database stay outside git.
+
+Tab opens fuzzy completion with case-insensitive matching; `<` / `>` switch completion groups. Type part of a command and press ↑ / ↓ to search matching history. Deja suggests commands inline: → accepts a suggestion, Ctrl+→ accepts a word, and Ctrl+] cycles alternatives. fzf also provides Ctrl+R history search, Ctrl+T file selection, and Alt+C directory selection, with the configured reverse layout and Rosé Pine colors.
+
+History lives at `${ZDOTDIR:-$HOME}/.zsh_history`, with one million entries and deduplication. `SHARE_HISTORY` writes commands immediately and shares them across shells; `INC_APPEND_HISTORY` is disabled because zsh recommends keeping those options mutually exclusive. Commands prefixed with a space remain excluded from history.
+
+mise also installs zoxide and bat. `z dotfiles` jumps to a frequently visited directory; `zi` opens an interactive directory picker. Entering a directory path alone changes directory (`AUTO_CD`), and visits populate a directory stack without duplicates (`AUTO_PUSHD`, `PUSHD_IGNORE_DUPS`); inspect it with `dirs -v` and jump with `cd ~1`, `cd ~2`, etc. Interactive `#` comments are enabled.
+
+Ctrl+T previews files with bat; Alt+C previews directory trees with eza. Ctrl+/ toggles the preview. Press Ctrl+X followed by Ctrl+E to edit the current command in Helix; saving and quitting returns it to the prompt for review. Deja's suggestion toggle is Ctrl+X followed by Ctrl+X, leaving the editor shortcut available.
+
+Bootstrap generates completions for mise, gh, starship, zoxide, ripgrep, and bat under `${XDG_CACHE_HOME:-~/.cache}/zsh/generated-completions`, which is added to `fpath` before `compinit`. Rerun `mise bootstrap --only tools,task` after upgrading tools to refresh them.
 
 Tinycast, Cursor CLI (`agent`), and Codex are installed by the `bootstrap` task. Already-present binaries are skipped. Tinycast is copied from the GitHub release DMG (mise does not install a `brew` CLI). Restore Tinycast settings from the app’s Backup & import, not from git.
 

@@ -12,6 +12,8 @@ delta = "latest"
 starship = "latest"
 fd = "latest"
 eza = "latest"
+zoxide = "latest"
+bat = "latest"
 
 [bootstrap.packages]
 "brew:mas" = "latest"
@@ -74,9 +76,9 @@ run = [
 "~/.ssh/config.d/dotfiles" = { source = "home/ssh/config", mode = "symlink" }
 "~/.ssh/config/include-dotfiles" = { line = "Include ~/.ssh/config.d/dotfiles" }
 
-# Vendor CLIs use official install scripts; Tinycast is a GitHub DMG (no brew CLI).
+# Vendor CLIs use official install scripts; zinit is a git checkout, Tinycast a DMG.
 # This file is also ~/.config/mise/config.toml, so task `file =` paths resolve from $HOME.
 [tasks.bootstrap]
-description = "Install Tinycast, Cursor CLI, and Codex"
+description = "Install zinit, Deja, zsh plugins, Tinycast, Cursor CLI, and Codex"
 dir = "~/src/dotfiles"
 run = "./scripts/install-extras.sh"

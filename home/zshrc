@@ -11,12 +11,14 @@ source "$ZSH_DIR/export.zsh"
 source "$ZSH_DIR/alias.zsh"
 source "$ZSH_DIR/functions.zsh"
 
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=50000
-setopt SHARE_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
-
-autoload -Uz compinit && compinit -C
+export HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_DUPS HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS HIST_REDUCE_BLANKS NO_BEEP HIST_IGNORE_SPACE
+# SHARE_HISTORY already appends immediately; zsh recommends not combining these.
+unsetopt INC_APPEND_HISTORY INC_APPEND_HISTORY_TIME
+setopt AUTO_CD AUTO_PUSHD PUSHD_IGNORE_DUPS INTERACTIVE_COMMENTS
 
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
@@ -33,3 +35,6 @@ export PATH=/Users/arthur/.opencode/bin:$PATH
 
 # bun global packages
 export PATH="/Users/arthur/.bun/bin:$PATH"
+
+# Load after local widgets and fzf's shell integration.
+source "$ZSH_DIR/plugins.zsh"
