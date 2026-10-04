@@ -9,6 +9,11 @@ alias gss="git status --short"
 alias glog="git log --oneline"
 alias gd="git diff"
 alias gaa="git add ."
+alias gpf="git push --force-with-lease"
+alias gcl="git clone --recurse-submodules"
+alias gco="git checkout"
+
+alias npx="bunx"
 
 if command -v eza &> /dev/null; then
   alias ls="eza"

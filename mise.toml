@@ -27,7 +27,10 @@ eza = "latest"
 "brew-cask:orbstack" = "latest"
 "brew-cask:nordvpn" = "latest"
 "brew-cask:slack" = "latest"
+"brew-cask:keepingyouawake" = "latest"
+"brew-cask:shottr" = "latest"
 "mas:1044549675" = "latest" # Elmedia Video Player
+"mas:1451685025" = "latest" # Wireguard
 
 [bootstrap.macos.dock]
 autohide = true
@@ -40,7 +43,7 @@ show_recents = false
 show_all_files = true
 
 [bootstrap.macos.defaults]
-"NSGlobalDomain" = { WebKitDeveloperExtras = true, KeyRepeat = 120.0 }
+"NSGlobalDomain" = { WebKitDeveloperExtras = true }
 "com.apple.Accessibility" = { KeyRepeatEnabled = 0 }
 "com.apple.NetworkBrowser" = { BrowseAllInterfaces = 1 }
 "com.apple.finder" = { NewWindowTarget = "PfHm", ShowRecentTags = false }

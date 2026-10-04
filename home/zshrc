@@ -27,3 +27,9 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 [[ -f "$ZSH_DIR/local.zsh" ]] && source "$ZSH_DIR/local.zsh"
+
+# opencode
+export PATH=/Users/arthur/.opencode/bin:$PATH
+
+# bun global packages
+export PATH="/Users/arthur/.bun/bin:$PATH"
