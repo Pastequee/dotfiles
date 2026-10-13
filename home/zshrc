@@ -38,3 +38,5 @@ export PATH="/Users/arthur/.bun/bin:$PATH"
 
 # Load after local widgets and fzf's shell integration.
 source "$ZSH_DIR/plugins.zsh"
+
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac

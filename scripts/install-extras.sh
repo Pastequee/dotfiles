@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 have() {
   command -v "$1" >/dev/null 2>&1
@@ -80,15 +80,3 @@ install_tinycast() {
 }
 
 install_tinycast
-
-if have agent || have cursor-agent; then
-  echo "Cursor CLI already installed"
-else
-  curl https://cursor.com/install -fsS | bash
-fi
-
-if have codex; then
-  echo "codex already installed"
-else
-  curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
-fi

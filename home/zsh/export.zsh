@@ -27,8 +27,4 @@ export DEJA_CYCLE_KEY='^]'
 # Keep Ctrl+X as a prefix for edit-command-line (Ctrl+X, Ctrl+E).
 export DEJA_TOGGLE_KEY='^X^X'
 
-if [[ "$(uname)" == "Darwin" ]]; then
-  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-fi
-
 export PATH="$HOME/.local/bin:$PATH"
