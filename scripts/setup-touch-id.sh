@@ -39,9 +39,14 @@ main() (
     exit 0
   fi
 
-  # SIP permits sudo_local but blocks arbitrary sibling files in /etc/pam.d.
-  # Render fully before installing to the supported destination.
-  sudo install -o root -g wheel -m 0644 "$staging" /etc/pam.d/sudo_local
+  # Write only the supported destination; install may create temporary siblings.
+  # Render fully before writing the configuration as root.
+  sudo /bin/sh -eu -c '
+    umask 022
+    cat "$1" > /etc/pam.d/sudo_local
+    chown root:wheel /etc/pam.d/sudo_local
+    chmod 0644 /etc/pam.d/sudo_local
+  ' sh "$staging"
   echo "Touch ID for sudo enabled in /etc/pam.d/sudo_local"
 )
 

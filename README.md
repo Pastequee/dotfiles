@@ -120,6 +120,8 @@ Bootstrap's `post-defaults` hook enables Touch ID for sudo through `/etc/pam.d/s
 
 To run just this step, use `mise run touch-id` or the existing `fingerprint_setup` shell function. The script leaves `/etc/pam.d/sudo` unchanged; it does not remove entries left by an older manual setup.
 
+If macOS denies the write with `Operation not permitted`, run `mise run --skip-tools touch-id` from an administrator Terminal with the required system access. Administrator authentication and bootstrap's `--yes` flag do not override restrictions imposed on the calling application. To apply the other bootstrap phases while resolving that restriction, use `mise bootstrap --skip macos-defaults --yes`.
+
 Other macOS defaults (key repeat off, hidden files, Finder windows open to Home, Dock auto-hide/smaller/no recents, Spotlight on Option+Space, AirDrop on all interfaces, WebKit extras) are applied by `mise bootstrap`. `~/Library` is unhidden and Finder/Dock are restarted in the `post-defaults` hook. Set Tinycast itself to Command+Space.
 
 ## Automatic updates
