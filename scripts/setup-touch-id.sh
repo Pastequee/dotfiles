@@ -39,13 +39,9 @@ main() (
     exit 0
   fi
 
-  # Stage beside the destination so the final rename is atomic.
-  sudo /bin/sh -eu -c '
-    staging=$(mktemp /etc/pam.d/.sudo_local.XXXXXX)
-    trap '\''rm -f "$staging"'\'' EXIT
-    install -o root -g wheel -m 0644 "$1" "$staging"
-    mv -f "$staging" /etc/pam.d/sudo_local
-  ' sh "$staging"
+  # SIP permits sudo_local but blocks arbitrary sibling files in /etc/pam.d.
+  # Render fully before installing to the supported destination.
+  sudo install -o root -g wheel -m 0644 "$staging" /etc/pam.d/sudo_local
   echo "Touch ID for sudo enabled in /etc/pam.d/sudo_local"
 )
 

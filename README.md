@@ -116,7 +116,7 @@ The tasks use `~/src/dotfiles` because the same mise config is linked globally. 
 
 ## Touch ID and macOS preferences
 
-Bootstrap's `post-defaults` hook enables Touch ID for sudo through `/etc/pam.d/sudo_local`. It preserves custom local PAM rules, skips writes when already enabled, and uses an atomic replacement owned by root. macOS retains this file across system updates. This requires a macOS version whose sudo configuration includes `sudo_local`, plus configured Touch ID hardware to use fingerprint authentication. It may prompt for your password during setup.
+Bootstrap's `post-defaults` hook enables Touch ID for sudo through `/etc/pam.d/sudo_local`. It preserves custom local PAM rules, skips writes when already enabled, and renders the configuration before installing it with root ownership. macOS retains this file across system updates. This requires a macOS version whose sudo configuration includes `sudo_local`, plus configured Touch ID hardware to use fingerprint authentication. It may prompt for your password during setup.
 
 To run just this step, use `mise run touch-id` or the existing `fingerprint_setup` shell function. The script leaves `/etc/pam.d/sudo` unchanged; it does not remove entries left by an older manual setup.
 
