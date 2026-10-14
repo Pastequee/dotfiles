@@ -2,7 +2,7 @@ Host *
 	LogLevel VERBOSE
 	Compression yes
 	ForwardX11 no
-	IdentityAgent ~/.1password/agent.sock
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 Host hls1.tail2d404b.ts.net
 	HostName hls1

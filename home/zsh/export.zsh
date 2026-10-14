@@ -1,6 +1,5 @@
 # Language
 export LANG=en_US.UTF-8
-export LC_LANG=en_US.UTF-8
 
 export EDITOR="hx"
 export VISUAL="hx"
@@ -26,5 +25,3 @@ export FZF_DEFAULT_OPTS='
 export DEJA_CYCLE_KEY='^]'
 # Keep Ctrl+X as a prefix for edit-command-line (Ctrl+X, Ctrl+E).
 export DEJA_TOGGLE_KEY='^X^X'
-
-export PATH="$HOME/.local/bin:$PATH"

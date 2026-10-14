@@ -1,4 +1,9 @@
-# mise (binary may live in ~/.local/bin before PATH is fully set)
+# Keep PATH entries unique, including additions made by local.zsh and mise.
+typeset -U path PATH
+path=("$HOME/.local/bin" $path "$HOME/.opencode/bin" "$HOME/.bun/bin")
+export PATH
+
+# mise puts managed tools ahead of optional, per-user tool directories.
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 elif [[ -x "$HOME/.local/bin/mise" ]]; then
@@ -30,13 +35,5 @@ fi
 
 [[ -f "$ZSH_DIR/local.zsh" ]] && source "$ZSH_DIR/local.zsh"
 
-# opencode
-export PATH=/Users/arthur/.opencode/bin:$PATH
-
-# bun global packages
-export PATH="/Users/arthur/.bun/bin:$PATH"
-
 # Load after local widgets and fzf's shell integration.
 source "$ZSH_DIR/plugins.zsh"
-
-case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac

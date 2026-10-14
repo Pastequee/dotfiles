@@ -1,2 +1,13 @@
 .DS_Store
 mise.local.toml
+
+# Machine-only files: keep examples tracked, identities and keys local.
+home/git/local_config
+home/zsh/local.zsh
+home/ssh/*
+!home/ssh/config
+.env
+.env.*
+!.env.example
+
+__pycache__/

@@ -1,0 +1,37 @@
+# Use the servers installed by mise. Projects can override these preferences
+# in their own .helix/languages.toml.
+[language-server.typescript-language-server]
+command = "dotfiles-typescript-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server"]
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server"]
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server"]
+auto-format = true
+
+[[language]]
+name = "toml"
+language-servers = ["taplo"]
+auto-format = true
+
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server"]
+formatter = { command = "shfmt", args = ["-i", "2", "-ci"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }

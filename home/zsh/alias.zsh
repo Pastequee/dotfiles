@@ -1,4 +1,4 @@
-alias c='cursor'
+alias c='agent'
 
 # Git
 alias gcmsg="git commit -m"

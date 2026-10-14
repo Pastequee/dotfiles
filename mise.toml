@@ -7,10 +7,18 @@ self_update.auto = "1d"
 
 [tools]
 node = "lts"
+python = "latest"
 pnpm = "latest"
 bun = "latest"
 fzf = "latest"
 helix = "latest"
+# TypeScript Language Server currently uses the TypeScript 6 tsserver API.
+"npm:typescript" = "6"
+"npm:typescript-language-server" = "latest"
+"npm:bash-language-server" = "latest"
+taplo = "latest"
+shellcheck = "latest"
+shfmt = "latest"
 gh = "latest"
 ripgrep = "latest"
 jq = "latest"
@@ -83,6 +91,7 @@ value = { enabled = true, value = { type = "standard", parameters = [32, 49, 524
 [bootstrap.hooks.post-defaults]
 run = [
   "chflags nohidden ~/Library",
+  "$HOME/src/dotfiles/scripts/setup-touch-id.sh",
   "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u",
   "killall Finder Dock SystemUIServer 2>/dev/null || true",
 ]
@@ -95,6 +104,8 @@ run = [
 "~/.config/git/ignore" = { source = "home/git/ignore", mode = "symlink" }
 "~/.config/starship.toml" = { source = "home/starship.toml", mode = "symlink" }
 "~/.config/helix/config.toml" = { source = "home/helix/config.toml", mode = "symlink" }
+"~/.config/helix/languages.toml" = { source = "home/helix/languages.toml", mode = "symlink" }
+"~/.local/bin/dotfiles-typescript-language-server" = { source = "home/helix/typescript-language-server.sh", mode = "symlink" }
 "~/.config/ghostty/config.ghostty" = { source = "home/ghostty/config.ghostty", mode = "symlink" }
 "~/.ssh/config.d/dotfiles" = { source = "home/ssh/config", mode = "symlink" }
 "~/.ssh/config/include-dotfiles" = { line = "Include ~/.ssh/config.d/dotfiles" }
@@ -105,3 +116,29 @@ run = [
 description = "Install zinit, Deja, zsh plugins, and Tinycast"
 dir = "~/src/dotfiles"
 run = "./scripts/install-extras.sh"
+
+[tasks.check]
+description = "Validate shell syntax, formatting, TOML, and dotfile declarations"
+dir = "~/src/dotfiles"
+run = "python3 scripts/check.py"
+
+[tasks.doctor]
+description = "Check machine setup, SSH, editor tools, and update services (use --skip-tools)"
+dir = "~/src/dotfiles"
+run = "./scripts/doctor.sh"
+
+[tasks.completions]
+description = "Refresh generated zsh completions without rerunning bootstrap"
+dir = "~/src/dotfiles"
+run = "./scripts/completions.sh"
+
+[tasks.update-extras]
+description = "Update Deja, Tinycast, zinit, and zsh plugins"
+dir = "~/src/dotfiles"
+run = "./scripts/install-extras.sh --update"
+
+[tasks.touch-id]
+description = "Enable Touch ID for sudo using macOS's persistent sudo_local config"
+dir = "~/src/dotfiles"
+run = "./scripts/setup-touch-id.sh"
+raw = true
